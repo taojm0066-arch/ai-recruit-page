@@ -327,7 +327,7 @@
 
   /* ---------- 响应式 ---------- */
   @media (max-width:760px){
-    .hero{padding:38px 0 32px}
+    .hero{overflow:visible;padding:38px 0 32px}
     .hero-art{display:none}
     .hero-wave{display:block;height:48px;position:relative;z-index:1;margin-top:-1px;background:transparent}
     .hero-wave svg{position:absolute;bottom:0;left:0;width:100%;height:100%;display:block}
@@ -338,9 +338,9 @@
     .hero-slogan{font-size:15px;line-height:1.75;margin-top:14px}
     .hero-cta{margin-top:22px;flex-direction:column;gap:12px}
     .hero-cta .btn{width:100%;justify-content:center;padding:13px 24px}
-    .hero-stats{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin-top:26px;padding-bottom:8px}
-    .hero-stats .stat{flex:0 0 auto;width:calc(50% - 5px);min-width:145px;scroll-snap-align:start;padding:14px 10px;border-radius:14px}
-    .hero-stats .stat-num{font-size:16px;letter-spacing:0}
+    .hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:26px}
+    .hero-stats .stat{padding:12px 8px;border-radius:14px}
+    .hero-stats .stat-num{font-size:13px;letter-spacing:0}
     .hero-stats .stat-label{font-size:11px}
     .cards{grid-template-columns:1fr}
     .form-grid{grid-template:initial;grid-template-columns:1fr}
