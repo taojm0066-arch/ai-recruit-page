@@ -242,6 +242,18 @@
   .field input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,108,255,.18)}
   .field input::placeholder{color:var(--text-faint)}
 
+  .field select{
+    width:100%;padding:13px 44px 13px 16px;border-radius:12px;
+    background:rgba(10,12,32,.65) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238b93b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center;
+    border:1px solid rgba(124,108,255,.22);
+    color:var(--text);font-size:15px;font-family:inherit;
+    outline:none;transition:border-color .2s,box-shadow .2s;
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+  }
+  .field select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,108,255,.18)}
+  .field select:invalid{color:var(--text-faint)}
+  .field select option{background:#0a0c20;color:var(--text)}
+
   .upload{
     position:relative;display:flex;align-items:center;gap:14px;
     padding:16px 18px;border-radius:12px;cursor:pointer;
@@ -447,7 +459,17 @@
           </div>
           <div class="field">
             <label>应聘岗位 <span class="req">*</span></label>
-            <input type="text" name="fi-select-position" value="AI核心技术专家" readonly style="cursor:default;color:var(--cyan);font-weight:600">
+            <select name="fi-select-position" required>
+              <option value="" disabled selected hidden>请选择应聘岗位</option>
+              <option>Uni-Terra（元壤）AI数智力底座产品线负责人</option>
+              <option>Uni-Janus（真如）融合网络仿真平台产品线负责人</option>
+              <option>Uni-SenRego（觉智）全域全量感知与经营产品线负责人</option>
+              <option>Uni-Midas（玄藏）数据认知与产业模型构建产品线负责人</option>
+              <option>AI核心技术专家</option>
+              <option>FDE前端部署工程师</option>
+              <option>AI产品架构师</option>
+              <option>高级产品经理</option>
+            </select>
           </div>
           <div class="field full">
             <label>上传简历 <span class="req">*</span></label>
@@ -521,10 +543,12 @@
 
     var name = form.querySelector('input[name=fi-sender-fullName]').value.trim();
     var phone = form.querySelector('input[name=fi-text-phone]').value.trim();
+    var position = form.querySelector('select[name=fi-select-position]').value;
     var file = fileInput.files[0];
 
     if(!name){ showMsg('err','请填写姓名'); return; }
     if(!phone){ showMsg('err','请填写联系电话'); return; }
+    if(!position){ showMsg('err','请选择应聘岗位'); return; }
     if(!file){ showMsg('err','请上传简历文件'); return; }
 
     btn.disabled = true;
@@ -534,7 +558,7 @@
     fd.append('fi-sender-fullName', name);
     fd.append('fi-text-phone', phone);
     fd.append('fi-sender-email', form.querySelector('input[name=fi-sender-email]').value.trim());
-    fd.append('fi-select-position', form.querySelector('input[name=fi-select-position]').value);
+    fd.append('fi-select-position', position);
     fd.append('fi-text-intro', form.querySelector('textarea[name=fi-text-intro]').value.trim());
     fd.append('fi-file-resume', file, file.name);
 
