@@ -102,10 +102,16 @@
   }
   .hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px rgba(0,168,255,.8);animation:pulse 2.2s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
-  .hero h1{
-    font-size:clamp(34px,7vw,62px);
-    font-weight:900;line-height:1.18;letter-spacing:1px;
+  .hero h1{display:flex;flex-direction:column;gap:8px}
+  .hero h1 .line1{
+    font-size:clamp(42px,8.5vw,74px);
+    font-weight:900;line-height:1.12;letter-spacing:2px;
     color:var(--text);
+  }
+  .hero h1 .line2{
+    font-size:clamp(20px,4vw,34px);
+    font-weight:700;line-height:1.35;letter-spacing:1px;
+    color:var(--text-2);
   }
   .hero h1 .accent{
     background:linear-gradient(120deg,var(--blue-2) 0%,var(--blue) 50%,var(--cyan) 100%);
@@ -312,11 +318,11 @@
   .msg.err{display:block;background:rgba(255,59,92,.08);color:var(--err);border:1px solid rgba(255,59,92,.35)}
 
   /* ---------- 页脚 ---------- */
-  footer{padding:44px 0 54px;background:linear-gradient(180deg,var(--navy) 0%,var(--navy-deep) 100%);text-align:center;border-top:none}
-  footer .brand{justify-content:center;margin-bottom:14px;color:#fff}
-  footer .brand-name{color:#fff}
-  footer .brand-sub{color:#8ab6e8}
-  .foot-text{font-size:13px;color:#9bbee8}
+  footer{padding:44px 0 54px;background:linear-gradient(180deg,#eef6ff 0%,#dfefff 100%);text-align:center;border-top:1px solid var(--line)}
+  footer .brand{justify-content:center;margin-bottom:14px;color:var(--text)}
+  footer .brand-name{color:var(--text)}
+  footer .brand-sub{color:var(--text-3)}
+  .foot-text{font-size:13px;color:var(--text-3)}
 
   /* ---------- 响应式 ---------- */
   @media (max-width:760px){
@@ -356,16 +362,7 @@
 <header>
   <div class="wrap nav">
     <a class="brand" href="#">
-      <svg class="brand-mark" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M24 4L42 14V34L24 44L6 34V14L24 4Z" fill="#0066FF"/>
-        <path d="M24 4L42 14L24 24L6 14L24 4Z" fill="#33A0FF"/>
-        <path d="M24 24L42 14V34L24 44V24Z" fill="#0052D9"/>
-        <path d="M24 24L6 14V34L24 44V24Z" fill="#1A7BFF"/>
-      </svg>
-      <div class="brand-text">
-        <span class="brand-name">中盈优创</span>
-        <span class="brand-sub">China Unitechs</span>
-      </div>
+      <img src="logo.png" alt="中盈优创" style="height:38px;width:auto;display:block">
     </a>
     <a class="nav-cta" href="#apply">立即投递</a>
   </div>
@@ -418,7 +415,7 @@
   <div class="wrap hero-grid">
     <div class="hero-content">
       <div class="hero-tag"><span class="dot"></span>AI技术团队 · 全球招募</div>
-      <h1>加入中盈，定义 <span class="accent">AI 时代</span> 的新基建</h1>
+      <h1><span class="line1">加入中盈</span><span class="line2">定义 <span class="accent">AI 时代</span> 的新基建</span></h1>
       <p class="hero-slogan">中盈优创正在组建顶尖 AI 团队，<b>你负责攻克核心技术、带队打硬仗</b>，公司给你<b>充足算力、C-Level 直报权限</b>，一起把 AI 变成商业成果。</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="#apply">🎯 立即投递简历</a>
