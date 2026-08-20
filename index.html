@@ -538,9 +538,6 @@
     btn.textContent = '提交中…';
 
     var fd = new FormData();
-    fd.append('access_key', 'b696dfe5-60bd-436f-adf2-6380e6e3c0d4');
-    fd.append('subject', '【简历投递】AI核心技术专家 - ' + name);
-    fd.append('from_name', '中盈优创招聘页');
     fd.append('姓名', name);
     fd.append('联系电话', phone);
     fd.append('邮箱', form.querySelector('input[name=邮箱]').value.trim());
@@ -548,19 +545,18 @@
     fd.append('自我介绍', form.querySelector('textarea[name=自我介绍]').value.trim());
     fd.append('简历附件', file, file.name);
 
-    fetch('https://api.web3forms.com/submit', {method:'POST', body:fd})
-      .then(function(r){ return r.json(); })
-      .then(function(data){
-        if(data.success){
-          form.reset();
-          fileName.textContent = '';
-          showMsg('ok','✅ 投递成功！我们会在 3 个工作日内联系你，请保持电话畅通。');
-        } else {
-          showMsg('err','提交失败：' + (data.message || '请稍后重试'));
-        }
+    fetch('https://forminit.com/f/f24vfhe12rw', {method:'POST', body:fd})
+      .then(function(r){
+        if(!r.ok){ throw new Error('HTTP ' + r.status); }
+        return r.json().catch(function(){ return {}; });
+      })
+      .then(function(){
+        form.reset();
+        fileName.textContent = '';
+        showMsg('ok','✅ 投递成功！我们会在 3 个工作日内联系你，请保持电话畅通。');
       })
       .catch(function(){
-        showMsg('err','网络异常，提交失败，请检查网络后重试');
+        showMsg('err','提交失败，请稍后重试');
       })
       .finally(function(){
         btn.disabled = false;
