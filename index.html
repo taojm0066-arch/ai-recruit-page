@@ -555,13 +555,12 @@
           fileName.textContent = '';
           showMsg('ok','✅ 投递成功！简历若通过筛选，我们将在 7 个工作日内与你联系，请保持电话畅通。');
         } else {
-          // 把后端真实报错显示出来，方便排查
-          var err = res.text.replace(/<[^>]+>/g,' ').trim().substring(0,120) || ('HTTP ' + res.status);
-          showMsg('err','提交失败：' + err);
+          // 友好提示 + 邮箱兜底，不显示技术错误（面向求职者）
+          showMsg('err','⚠️ 提交未成功，请稍后重试。若仍未能成功投递，您也可将简历直接发送至招聘邮箱 hr@unitechs.com，邮件标题注明「姓名+应聘岗位」。');
         }
       })
       .catch(function(e){
-        showMsg('err','网络异常：' + (e.message || '请稍后重试'));
+        showMsg('err','⚠️ 网络异常，提交未成功。您也可将简历直接发送至招聘邮箱 hr@unitechs.com，邮件标题注明「姓名+应聘岗位」。');
       })
       .finally(function(){
         btn.disabled = false;
