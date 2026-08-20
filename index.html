@@ -438,24 +438,24 @@
         <div class="form-grid">
           <div class="field">
             <label>姓名 <span class="req">*</span></label>
-            <input type="text" name="姓名" placeholder="请输入你的姓名" required>
+            <input type="text" name="fi-sender-fullName" placeholder="请输入你的姓名" required>
           </div>
           <div class="field">
             <label>联系电话 <span class="req">*</span></label>
-            <input type="tel" name="联系电话" placeholder="手机号 / 微信号" required>
+            <input type="tel" name="fi-text-phone" placeholder="手机号 / 微信号" required>
           </div>
           <div class="field">
             <label>邮箱</label>
-            <input type="email" name="邮箱" placeholder="用于接收面试通知">
+            <input type="email" name="fi-sender-email" placeholder="用于接收面试通知">
           </div>
           <div class="field">
             <label>应聘岗位 <span class="req">*</span></label>
-            <input type="text" name="应聘岗位" value="AI核心技术专家" readonly style="cursor:default;color:var(--cyan);font-weight:600">
+            <input type="text" name="fi-select-position" value="AI核心技术专家" readonly style="cursor:default;color:var(--cyan);font-weight:600">
           </div>
           <div class="field full">
             <label>上传简历 <span class="req">*</span></label>
             <label class="upload">
-              <input type="file" name="简历附件" accept=".pdf,.doc,.docx" required>
+              <input type="file" name="fi-file-resume" accept=".pdf,.doc,.docx" required>
               <span class="upload-icon">📄</span>
               <span class="upload-text">
                 <b>点击选择简历文件</b><br>
@@ -466,7 +466,7 @@
           </div>
           <div class="field full">
             <label>一句话自我介绍（选填）</label>
-            <textarea name="自我介绍" placeholder="例如：5 年大模型研发经验，主导过 XX 产品从 0 到 1 落地，擅长多模态与推理优化……"></textarea>
+            <textarea name="fi-text-intro" placeholder="例如：5 年大模型研发经验，主导过 XX 产品从 0 到 1 落地，擅长多模态与推理优化……"></textarea>
           </div>
           <div class="submit-row">
             <button type="submit" class="btn-submit" id="submit-btn">提交简历</button>
@@ -526,8 +526,8 @@
     msg.className = 'msg';
     msg.textContent = '';
 
-    var name = form.querySelector('input[name=姓名]').value.trim();
-    var phone = form.querySelector('input[name=联系电话]').value.trim();
+    var name = form.querySelector('input[name=fi-sender-fullName]').value.trim();
+    var phone = form.querySelector('input[name=fi-text-phone]').value.trim();
     var file = fileInput.files[0];
 
     if(!name){ showMsg('err','请填写姓名'); return; }
@@ -538,12 +538,12 @@
     btn.textContent = '提交中…';
 
     var fd = new FormData();
-    fd.append('姓名', name);
-    fd.append('联系电话', phone);
-    fd.append('邮箱', form.querySelector('input[name=邮箱]').value.trim());
-    fd.append('应聘岗位', form.querySelector('input[name=应聘岗位]').value);
-    fd.append('自我介绍', form.querySelector('textarea[name=自我介绍]').value.trim());
-    fd.append('简历附件', file, file.name);
+    fd.append('fi-sender-fullName', name);
+    fd.append('fi-text-phone', phone);
+    fd.append('fi-sender-email', form.querySelector('input[name=fi-sender-email]').value.trim());
+    fd.append('fi-select-position', form.querySelector('input[name=fi-select-position]').value);
+    fd.append('fi-text-intro', form.querySelector('textarea[name=fi-text-intro]').value.trim());
+    fd.append('fi-file-resume', file, file.name);
 
     fetch('https://forminit.com/f/f24vfhe12rw', {method:'POST', body:fd})
       .then(function(r){
