@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>中盈优创 · AI核心技术专家 招聘</title>
+<meta name="description" content="中盈优创诚聘AI核心技术专家，月薪40k-70k，工作地点上海/南京/北京/重庆，提供充足算力支持与C-Level直报权限。扫码投递简历，加入我们定义AI时代新基建。">
+<style>
+  :root{
+    --bg-0:#070818;
+    --bg-1:#0d0f2b;
+    --bg-2:#131743;
+    --card:rgba(23,28,66,.72);
+    --card-solid:#181d4d;
+    --line:rgba(124,108,255,.16);
+    --purple:#8b7cff;
+    --purple-2:#6c5ce7;
+    --blue:#4d8dff;
+    --cyan:#38e1ff;
+    --text:#eef0ff;
+    --text-dim:#a8adcf;
+    --text-faint:#7c82ab;
+    --ok:#3ddc97;
+    --warn:#ffb454;
+    --err:#ff6b81;
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+    background:var(--bg-0);
+    color:var(--text);
+    line-height:1.7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* ---------- 背景氛围 ---------- */
+  .bg-wrap{position:fixed;inset:0;z-index:-2;background:
+    radial-gradient(900px 520px at 85% -10%, rgba(109,92,231,.35), transparent 60%),
+    radial-gradient(800px 480px at -10% 15%, rgba(56,130,255,.22), transparent 60%),
+    radial-gradient(700px 500px at 50% 110%, rgba(139,124,255,.18), transparent 60%),
+    linear-gradient(180deg,var(--bg-0),var(--bg-1) 40%,var(--bg-2));
+  }
+  .bg-grid{position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(124,108,255,.05) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(124,108,255,.05) 1px,transparent 1px);
+    background-size:44px 44px;
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 20%,#000 30%,transparent 75%);
+    -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 20%,#000 30%,transparent 75%);
+  }
+  .glow-orb{position:fixed;border-radius:50%;filter:blur(70px);opacity:.5;z-index:-1;pointer-events:none}
+  .orb-1{width:340px;height:340px;top:-120px;right:-80px;background:rgba(124,108,255,.5)}
+  .orb-2{width:300px;height:300px;bottom:-100px;left:-100px;background:rgba(77,141,255,.4)}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+  /* ---------- 顶部导航 ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    background:rgba(7,8,24,.72);
+    border-bottom:1px solid rgba(124,108,255,.12);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text)}
+  .brand-logo{
+    width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--purple),var(--blue));
+    box-shadow:0 6px 18px rgba(109,92,231,.45);
+    font-weight:800;font-size:16px;color:#fff;letter-spacing:-1px;
+  }
+  .brand-name{font-weight:700;font-size:16px;letter-spacing:.5px}
+  .brand-sub{font-size:11px;color:var(--text-faint);letter-spacing:2px}
+  .nav-cta{
+    text-decoration:none;font-size:14px;font-weight:600;color:#fff;
+    background:linear-gradient(135deg,var(--purple-2),var(--blue));
+    padding:9px 20px;border-radius:999px;
+    box-shadow:0 8px 20px rgba(109,92,231,.4);
+    transition:transform .2s,box-shadow .2s;
+  }
+  .nav-cta:active{transform:scale(.96)}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:72px 0 56px;text-align:center;position:relative}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--cyan);letter-spacing:1px;
+    padding:7px 16px;border-radius:999px;
+    border:1px solid rgba(56,225,255,.35);
+    background:rgba(56,225,255,.08);
+    margin-bottom:26px;
+  }
+  .hero-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan);box-shadow:0 0 10px var(--cyan);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .hero h1{
+    font-size:clamp(30px,6.4vw,52px);
+    font-weight:800;line-height:1.25;letter-spacing:1px;
+    background:linear-gradient(120deg,#fff 20%,var(--purple) 60%,var(--cyan) 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+    color:transparent;
+  }
+  .hero h1 .accent{white-space:nowrap}
+  .hero-slogan{
+    margin:22px auto 0;max-width:640px;
+    font-size:clamp(15px,3.6vw,18px);color:var(--text-dim);
+  }
+  .hero-slogan b{color:var(--text);font-weight:600}
+  .hero-cta{margin-top:36px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    text-decoration:none;font-size:16px;font-weight:700;
+    padding:14px 34px;border-radius:999px;border:none;cursor:pointer;
+    transition:transform .2s,box-shadow .2s,opacity .2s;
+  }
+  .btn-primary{
+    color:#fff;
+    background:linear-gradient(135deg,var(--purple-2),var(--blue));
+    box-shadow:0 12px 28px rgba(109,92,231,.45);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(109,92,231,.55)}
+  .btn-ghost{
+    color:var(--text-dim);background:transparent;
+    border:1px solid rgba(124,108,255,.35);
+  }
+  .btn-ghost:hover{color:#fff;border-color:var(--purple);transform:translateY(-2px)}
+
+  .hero-stats{
+    margin:44px auto 0;max-width:760px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;
+  }
+  .stat{
+    padding:16px 8px;border-radius:var(--radius);
+    background:var(--card);border:1px solid var(--line);
+  }
+  .stat-num{font-size:clamp(18px,4vw,26px);font-weight:800;background:linear-gradient(120deg,var(--purple),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .stat-label{font-size:12px;color:var(--text-faint);margin-top:2px}
+
+  /* ---------- 通用区块 ---------- */
+  section{padding:52px 0}
+  .sec-head{text-align:center;margin-bottom:36px}
+  .sec-kicker{
+    display:inline-block;font-size:12px;letter-spacing:3px;color:var(--purple);
+    font-weight:600;margin-bottom:10px;text-transform:uppercase;
+  }
+  .sec-title{font-size:clamp(22px,5vw,32px);font-weight:800;letter-spacing:1px}
+  .sec-title .g{
+    background:linear-gradient(120deg,var(--purple),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+  }
+
+  /* ---------- 岗位亮点 ---------- */
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .card{
+    position:relative;border-radius:var(--radius);
+    background:var(--card);border:1px solid var(--line);
+    padding:24px 20px;
+    transition:transform .25s,border-color .25s;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--purple),transparent);
+    opacity:0;transition:opacity .3s;
+  }
+  .card:hover{transform:translateY(-4px);border-color:rgba(139,124,255,.5)}
+  .card:hover::before{opacity:1}
+  .card-icon{
+    width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+    margin-bottom:14px;font-size:21px;
+    background:linear-gradient(135deg,rgba(124,108,255,.22),rgba(77,141,255,.18));
+    border:1px solid rgba(124,108,255,.3);
+  }
+  .card h3{font-size:16px;font-weight:700;margin-bottom:8px}
+  .card p{font-size:13.5px;color:var(--text-dim);line-height:1.6}
+  .card p b{color:var(--cyan);font-weight:700;font-size:14.5px}
+
+  /* ---------- JD 列表 ---------- */
+  .jd-block{
+    border-radius:var(--radius);
+    background:var(--card);border:1px solid var(--line);
+    padding:clamp(22px,4vw,36px);
+    margin-bottom:22px;
+  }
+  .jd-block h3{
+    display:flex;align-items:center;gap:10px;
+    font-size:clamp(17px,3.8vw,20px);font-weight:800;margin-bottom:20px;
+  }
+  .jd-block h3 .no{
+    width:30px;height:30px;flex:none;border-radius:9px;display:grid;place-items:center;
+    font-size:14px;color:#fff;
+    background:linear-gradient(135deg,var(--purple-2),var(--blue));
+    box-shadow:0 6px 14px rgba(109,92,231,.4);
+  }
+  .jd-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+  .jd-list li{
+    position:relative;padding-left:22px;
+    font-size:clamp(14px,3.6vw,15.5px);color:var(--text-dim);
+  }
+  .jd-list li::before{
+    content:"";position:absolute;left:2px;top:11px;
+    width:7px;height:7px;border-radius:2px;
+    background:linear-gradient(135deg,var(--purple),var(--cyan));
+  }
+  .jd-list li b{color:var(--text);font-weight:600}
+
+  /* ---------- 表单 ---------- */
+  .form-sec{position:relative;padding:64px 0 80px}
+  .form-card{
+    max-width:760px;margin:0 auto;border-radius:22px;
+    background:linear-gradient(180deg,var(--card-solid),rgba(23,28,66,.9));
+    border:1px solid rgba(124,108,255,.25);
+    padding:clamp(24px,5vw,44px);
+    box-shadow:0 24px 60px rgba(0,0,0,.45);
+    position:relative;overflow:hidden;
+  }
+  .form-card::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(400px 200px at 90% -10%,rgba(109,92,231,.25),transparent 60%),
+      radial-gradient(300px 180px at 0% 110%,rgba(56,130,255,.18),transparent 60%);
+  }
+  .form-title{text-align:center;margin-bottom:8px;position:relative}
+  .form-title h2{font-size:clamp(22px,5vw,28px);font-weight:800}
+  .form-sub{text-align:center;color:var(--text-faint);font-size:13.5px;margin-bottom:30px;position:relative}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;position:relative}
+  .field{display:flex;flex-direction:column;gap:7px}
+  .field.full{grid-column:1/-1}
+  .field label{font-size:13.5px;font-weight:600;color:var(--text-dim)}
+  .field label .req{color:var(--err);margin-left:2px}
+  .field input[type=text],
+  .field input[type=tel],
+  .field input[type=email]{
+    width:100%;padding:13px 16px;border-radius:12px;
+    background:rgba(10,12,32,.65);
+    border:1px solid rgba(124,108,255,.22);
+    color:var(--text);font-size:15px;font-family:inherit;
+    outline:none;transition:border-color .2s,box-shadow .2s;
+  }
+  .field input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,108,255,.18)}
+  .field input::placeholder{color:var(--text-faint)}
+
+  .upload{
+    position:relative;display:flex;align-items:center;gap:14px;
+    padding:16px 18px;border-radius:12px;cursor:pointer;
+    background:rgba(10,12,32,.65);
+    border:1.5px dashed rgba(124,108,255,.35);
+    transition:border-color .2s,background .2s;
+  }
+  .upload:hover{border-color:var(--purple);background:rgba(124,108,255,.06)}
+  .upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
+  .upload-icon{
+    width:42px;height:42px;flex:none;border-radius:11px;display:grid;place-items:center;
+    font-size:19px;background:linear-gradient(135deg,rgba(124,108,255,.25),rgba(77,141,255,.2));
+    border:1px solid rgba(124,108,255,.35);
+  }
+  .upload-text{font-size:13.5px;color:var(--text-dim);line-height:1.5}
+  .upload-text b{color:var(--text)}
+  .upload-name{font-size:12.5px;color:var(--cyan);word-break:break-all}
+
+  textarea{
+    width:100%;padding:13px 16px;border-radius:12px;resize:vertical;min-height:86px;
+    background:rgba(10,12,32,.65);
+    border:1px solid rgba(124,108,255,.22);
+    color:var(--text);font-size:15px;font-family:inherit;outline:none;
+    transition:border-color .2s,box-shadow .2s;
+  }
+  textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,108,255,.18)}
+  textarea::placeholder{color:var(--text-faint)}
+
+  .submit-row{grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:8px}
+  .btn-submit{
+    width:100%;justify-content:center;font-size:16.5px;padding:16px 0;
+    background:linear-gradient(135deg,var(--purple-2),var(--blue));
+    color:#fff;border:none;border-radius:999px;font-weight:800;cursor:pointer;
+    box-shadow:0 12px 30px rgba(109,92,231,.45);
+    transition:transform .2s,box-shadow .2s,opacity .2s;
+  }
+  .btn-submit:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(109,92,231,.55)}
+  .btn-submit:disabled{opacity:.55;cursor:not-allowed;transform:none}
+  .form-hint{font-size:12px;color:var(--text-faint)}
+
+  .msg{display:none;width:100%;padding:13px 16px;border-radius:12px;font-size:14px;font-weight:600;text-align:center}
+  .msg.ok{display:block;background:rgba(61,220,151,.12);color:var(--ok);border:1px solid rgba(61,220,151,.4)}
+  .msg.err{display:block;background:rgba(255,107,129,.1);color:var(--err);border:1px solid rgba(255,107,129,.4)}
+
+  /* ---------- 页脚 ---------- */
+  footer{padding:34px 0 44px;border-top:1px solid rgba(124,108,255,.12);text-align:center}
+  footer .brand{justify-content:center;margin-bottom:10px}
+  .foot-text{font-size:12.5px;color:var(--text-faint)}
+  .foot-text a{color:var(--text-faint);text-decoration:none}
+  .foot-text a:hover{color:var(--purple)}
+
+  /* ---------- 响应式 ---------- */
+  /* 竖屏手机（默认单列） */
+  @media (max-width:640px){
+    .hero{padding:52px 0 44px}
+    .hero-stats{grid-template-columns:repeat(2,1fr)}
+    .cards{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+  }
+  /* 横屏手机 / 小平板（宽但矮，优先把信息密度拉高） */
+  @media (min-width:641px) and (max-width:900px){
+    .cards{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (orientation:landscape) and (max-height:520px){
+    .hero{padding:40px 0 32px}
+    .hero-stats{grid-template-columns:repeat(4,1fr);margin-top:28px}
+    .nav-cta{padding:7px 16px;font-size:13px}
+    section{padding:36px 0}
+    .form-sec{padding:44px 0 56px}
+  }
+  /* 宽屏 */
+  @media (min-width:901px){
+    .hero{padding:88px 0 64px}
+    .cards{grid-template-columns:repeat(4,1fr)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+<div class="bg-wrap"></div>
+<div class="bg-grid"></div>
+<div class="glow-orb orb-1"></div>
+<div class="glow-orb orb-2"></div>
+
+<!-- 顶部导航 -->
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#">
+      <span class="brand-logo">中盈</span>
+      <span>
+        <span class="brand-name">中盈优创</span><br>
+        <span class="brand-sub">UNITED INFORMATION</span>
+      </span>
+    </a>
+    <a class="nav-cta" href="#apply">立即投递</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-tag"><span class="dot"></span>AI 核心技术专家 · 全球招募</div>
+    <h1>加入中盈<br>定义 <span class="accent">AI 时代</span> 的新基建</h1>
+    <p class="hero-slogan">中盈优创正在组建顶尖 AI 团队，<b>你负责攻克核心技术、带队打硬仗</b>，公司给你<b>充足算力、C-Level 直报权限</b>，一起把 AI 变成商业成果。</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#apply">🎯 立即投递简历</a>
+      <a class="btn btn-ghost" href="#jd">查看岗位详情</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">40k-70k</div><div class="stat-label">月薪 · 能力定级</div></div>
+      <div class="stat"><div class="stat-num">≤35岁</div><div class="stat-label">优先年轻优质人才</div></div>
+      <div class="stat"><div class="stat-num">4城</div><div class="stat-label">上海/南京/北京/重庆</div></div>
+      <div class="stat"><div class="stat-num">C-Level</div><div class="stat-label">直报权限 · 带队权</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 岗位亮点 -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Why Us</div>
+      <h2 class="sec-title">为什么是 <span class="g">中盈优创</span></h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="card-icon">💰</div>
+        <h3>薪酬诚意拉满</h3>
+        <p>月薪 <b>40k-70k</b>，能力定级，不画饼、敢给钱，顶级人才值得顶级回报。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <h3>算力管够</h3>
+        <p>提供<b>充足算力资源</b>，模型训练、架构验证不卡脖子，想法直接开干。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">👑</div>
+        <h3>直接对 C-Level</h3>
+        <p>具备<b>向 C-Level 汇报及带队权限</b>，决策链路短，你的判断就是方向。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌆</div>
+        <h3>四城可选</h3>
+        <p>上海 / 南京 / 北京 / 重庆，<b>工作地任选</b>，在哪座城市都能干大事。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 岗位详情 JD -->
+<section id="jd">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-kicker">Job Description</div>
+      <h2 class="sec-title">岗位详情 · <span class="g">AI 核心技术专家</span></h2>
+    </div>
+
+    <div class="jd-block">
+      <h3><span class="no">一</span>岗位职责</h3>
+      <ul class="jd-list">
+        <li>负责<b>大模型、多模态、智能系统</b>等 AI 相关技术研发、架构优化与场景落地，攻克核心技术难点，统筹内容安全、数据隐私等 <b>AI 合规方案</b>设计。</li>
+        <li>独立牵头<b>企业级 AI 重点产品</b>，统筹技术选型、架构设计、全流程研发迭代，输出可商业化的落地成果。</li>
+        <li>搭建优化团队 <b>AI 技术体系与研发规范</b>，沉淀通用技术能力，筑牢团队技术壁垒。</li>
+        <li>对接各业务团队，高效拆解需求、推进项目落地，<b>赋能业务智能化升级</b>。</li>
+        <li>跟进行业前沿 AI 技术，完成<b>技术调研与落地验证</b>，带动团队技术能力跃迁。</li>
+      </ul>
+    </div>
+
+    <div class="jd-block">
+      <h3><span class="no">二</span>任职要求</h3>
+      <ul class="jd-list">
+        <li><b>985/211 院校或海外 QS 前 100 名校</b>毕业，计算机、人工智能、大数据、数理统计等相关专业，<b>硕士及以上学历</b>；综合能力极其优异的顶尖本科人才可破格录用。</li>
+        <li>具备 <b>5 年及以上研发工作经验</b>（其中 2 年以上技术团队管理或项目负责人经验），头部互联网、AI 独角兽企业核心技术研发经验优先。</li>
+        <li>深耕 AI 相关技术领域，拥有完整的项目落地与技术迭代经验，有 <b>AI 产品从 0 到 1 商业化落地的完整成功案例</b>，能提供可量化的业务价值数据优先。</li>
+        <li>具备扎实的 <b>AI 全栈技术功底</b>，熟练掌握大模型、多模态技术、机器学习、智能系统研发、深度学习等核心技术方向；拥有较强的技术架构设计、疑难问题攻坚、工程落地优化能力，具备可量化、可溯源的商业化项目实战成果。</li>
+        <li>具备<b>顶尖的逻辑思维与拆解分析能力</b>，拥有敏锐的行业技术洞察力，能够快速迭代学习前沿 AI 技术，精准把控技术落地与业务适配方向。</li>
+        <li>具备优秀的<b>沟通协同、统筹推进及抗压能力</b>，双商出众，自驱力与目标感极强；兼具技术视野与业务思维，职业素养良好，工作沉稳靠谱，适配核心岗位攻坚与协作需求。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 投递表单 -->
+<section class="form-sec" id="apply">
+  <div class="wrap">
+    <div class="form-card">
+      <div class="form-title">
+        <h2>🚀 投递简历</h2>
+      </div>
+      <p class="form-sub">填写下方信息并上传简历（支持 PDF / Word，10MB 以内），提交后我们将在 <b style="color:var(--text-dim)">3 个工作日内</b>与你联系。</p>
+
+      <form id="apply-form" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label>姓名 <span class="req">*</span></label>
+            <input type="text" name="姓名" placeholder="请输入你的姓名" required>
+          </div>
+          <div class="field">
+            <label>联系电话 <span class="req">*</span></label>
+            <input type="tel" name="联系电话" placeholder="手机号 / 微信号" required>
+          </div>
+          <div class="field">
+            <label>邮箱</label>
+            <input type="email" name="邮箱" placeholder="用于接收面试通知">
+          </div>
+          <div class="field">
+            <label>应聘岗位 <span class="req">*</span></label>
+            <input type="text" name="应聘岗位" value="AI核心技术专家" readonly style="cursor:default;color:var(--cyan);font-weight:600">
+          </div>
+          <div class="field full">
+            <label>上传简历 <span class="req">*</span></label>
+            <label class="upload">
+              <input type="file" name="简历附件" accept=".pdf,.doc,.docx" required>
+              <span class="upload-icon">📄</span>
+              <span class="upload-text">
+                <b>点击选择简历文件</b><br>
+                支持 PDF / Word，10MB 以内
+                <span class="upload-name" id="file-name"></span>
+              </span>
+            </label>
+          </div>
+          <div class="field full">
+            <label>一句话自我介绍（选填）</label>
+            <textarea name="自我介绍" placeholder="例如：5 年大模型研发经验，主导过 XX 产品从 0 到 1 落地，擅长多模态与推理优化……"></textarea>
+          </div>
+          <div class="submit-row">
+            <button type="submit" class="btn-submit" id="submit-btn">提交简历</button>
+            <div class="msg" id="form-msg"></div>
+            <p class="form-hint">提交即代表你同意中盈优创将上述信息仅用于招聘流程，信息将被严格保密。</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand-logo">中盈</span>
+      <span>
+        <span class="brand-name">中盈优创</span><br>
+        <span class="brand-sub">UNITED INFORMATION</span>
+      </span>
+    </div>
+    <p class="foot-text">© 2026 中盈优创 · AI核心技术专家招聘 · 期待你的加入</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var form = document.getElementById('apply-form');
+  var msg = document.getElementById('form-msg');
+  var btn = document.getElementById('submit-btn');
+  var fileName = document.getElementById('file-name');
+  var fileInput = form.querySelector('input[type=file]');
+
+  fileInput.addEventListener('change', function(){
+    var f = fileInput.files[0];
+    if(f){
+      var sizeMB = f.size/1024/1024;
+      if(sizeMB > 10){
+        fileName.textContent = '';
+        fileInput.value = '';
+        showMsg('err','文件超过 10MB，请压缩后重新上传');
+        return;
+      }
+      var okExt = /\.(pdf|doc|docx)$/i.test(f.name);
+      if(!okExt){
+        fileName.textContent = '';
+        fileInput.value = '';
+        showMsg('err','仅支持 PDF / Word 格式');
+        return;
+      }
+      fileName.textContent = '✅ ' + f.name + '（' + sizeMB.toFixed(1) + 'MB）';
+    }
+  });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    msg.className = 'msg';
+    msg.textContent = '';
+
+    var name = form.querySelector('input[name=姓名]').value.trim();
+    var phone = form.querySelector('input[name=联系电话]').value.trim();
+    var file = fileInput.files[0];
+
+    if(!name){ showMsg('err','请填写姓名'); return; }
+    if(!phone){ showMsg('err','请填写联系电话'); return; }
+    if(!file){ showMsg('err','请上传简历文件'); return; }
+
+    btn.disabled = true;
+    btn.textContent = '提交中…';
+
+    var fd = new FormData();
+    fd.append('access_key', 'b696dfe5-60bd-436f-adf2-6380e6e3c0d4');
+    fd.append('subject', '【简历投递】AI核心技术专家 - ' + name);
+    fd.append('from_name', '中盈优创招聘页');
+    fd.append('姓名', name);
+    fd.append('联系电话', phone);
+    fd.append('邮箱', form.querySelector('input[name=邮箱]').value.trim());
+    fd.append('应聘岗位', form.querySelector('input[name=应聘岗位]').value);
+    fd.append('自我介绍', form.querySelector('textarea[name=自我介绍]').value.trim());
+    fd.append('简历附件', file, file.name);
+
+    fetch('https://api.web3forms.com/submit', {method:'POST', body:fd})
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if(data.success){
+          form.reset();
+          fileName.textContent = '';
+          showMsg('ok','✅ 投递成功！我们会在 3 个工作日内联系你，请保持电话畅通。');
+        } else {
+          showMsg('err','提交失败：' + (data.message || '请稍后重试'));
+        }
+      })
+      .catch(function(){
+        showMsg('err','网络异常，提交失败，请检查网络后重试');
+      })
+      .finally(function(){
+        btn.disabled = false;
+        btn.textContent = '提交简历';
+      });
+  });
+
+  function showMsg(type, text){
+    msg.className = 'msg ' + type;
+    msg.textContent = text;
+  }
+})();
+</script>
+</body>
+</html>
