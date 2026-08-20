@@ -547,16 +547,21 @@
 
     fetch('https://forminit.com/f/f24vfhe12rw', {method:'POST', body:fd})
       .then(function(r){
-        if(!r.ok){ throw new Error('HTTP ' + r.status); }
-        return r.json().catch(function(){ return {}; });
+        return r.text().then(function(t){ return {ok:r.ok, status:r.status, text:t}; });
       })
-      .then(function(){
-        form.reset();
-        fileName.textContent = '';
-        showMsg('ok','✅ 投递成功！我们会在 3 个工作日内联系你，请保持电话畅通。');
+      .then(function(res){
+        if(res.ok){
+          form.reset();
+          fileName.textContent = '';
+          showMsg('ok','✅ 投递成功！我们会在 3 个工作日内联系你，请保持电话畅通。');
+        } else {
+          // 把后端真实报错显示出来，方便排查
+          var err = res.text.replace(/<[^>]+>/g,' ').trim().substring(0,120) || ('HTTP ' + res.status);
+          showMsg('err','提交失败：' + err);
+        }
       })
-      .catch(function(){
-        showMsg('err','提交失败，请稍后重试');
+      .catch(function(e){
+        showMsg('err','网络异常：' + (e.message || '请稍后重试'));
       })
       .finally(function(){
         btn.disabled = false;
