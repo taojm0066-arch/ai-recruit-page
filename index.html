@@ -343,16 +343,19 @@
     .hero-slogan{font-size:15px;line-height:1.75;margin-top:14px}
     .hero-cta{margin-top:22px;flex-direction:column;gap:12px}
     .hero-cta .btn{width:100%;justify-content:center;padding:13px 24px}
-    .hero-stats{display:flex;flex-direction:column;gap:10px;margin-top:26px}
-    .hero-stats .stat{width:100%;min-height:auto;padding:14px 16px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
-    .hero-stats .stat-num{font-size:19px;letter-spacing:0}
-    .hero-stats .stat-label{font-size:13px;line-height:1.5;min-height:auto;margin-top:0}
-    /* 亮点卡片居中 */
-    .card{text-align:center;padding:26px 20px}
-    .card-icon{margin-left:auto;margin-right:auto}
+    /* 数据卡 2x2 */
+    .hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:26px}
+    .hero-stats .stat{padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+    .hero-stats .stat-num{font-size:19px;letter-spacing:0;word-break:break-word}
+    .hero-stats .stat-label{font-size:12px;line-height:1.5;min-height:auto;margin-top:0;word-break:break-word}
+    /* 亮点卡片 2x2 居中 */
+    .card{text-align:center;padding:20px 14px}
+    .card-icon{margin-left:auto;margin-right:auto;width:46px;height:46px;font-size:20px;margin-bottom:12px}
+    .card h3{font-size:15px;margin-bottom:8px}
+    .card p{font-size:13px;line-height:1.6}
     /* JD 区块标题居中 */
     .jd-block h3{justify-content:center}
-    .cards{grid-template-columns:1fr}
+    .cards{grid-template-columns:repeat(2,1fr);gap:14px}
     .form-grid{grid-template:initial;grid-template-columns:1fr}
   }
   @media (max-width:480px){
@@ -361,6 +364,14 @@
     .hero h1 .line1{font-size:clamp(32px,12.5vw,48px)}
     .hero h1 .line2{font-size:clamp(15px,5.5vw,20px)}
     .hero-wave{height:40px}
+    /* 超小屏：数字与卡片内容再收紧，避免英文断行 */
+    .hero-stats{gap:8px}
+    .hero-stats .stat{padding:12px 8px}
+    .hero-stats .stat-num{font-size:17px}
+    .hero-stats .stat-label{font-size:11.5px}
+    .card{padding:18px 12px}
+    .card h3{font-size:14px}
+    .card p{font-size:12.5px;line-height:1.55}
   }
   @media (min-width:761px) and (max-width:980px){
     .cards{grid-template-columns:repeat(2,1fr)}
